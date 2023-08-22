@@ -5,3 +5,7 @@ create database fitness_analytics;
 create schema fitness_raw.myfitnesspal;
 create schema fitness_raw.training;
 create schema fitness_raw.applehealth;
+
+-- Step 2: Create an external stage for public s3 bucket containing raw data
+create stage fitness_s3_stage
+  url = 's3://fitness-data-hr/';
