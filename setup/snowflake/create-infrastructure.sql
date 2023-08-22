@@ -29,3 +29,11 @@ create table fitness_raw.myfitnesspal.nutrition
   fiber_g FLOAT,
   sugar_g FLOAT
 );
+
+copy into fitness_raw.myfitnesspal.measurements (date, weight)
+from @fitness_s3_stage/Measurement-Summary-2014-07-04-to-2023-08-18.csv
+file_format = (
+  type = 'CSV'
+  field_delimiter = ','
+  skip_header = 1
+);
