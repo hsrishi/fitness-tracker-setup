@@ -21,7 +21,7 @@ create or replace table fitness_raw.myfitnesspal.nutrition
 (
   date DATE,
   meal VARCHAR(50),
-  time DATETIME,
+  time VARCHAR(50),
   calories FLOAT,
   fat_g FLOAT,
   fat_saturated_g FLOAT,
