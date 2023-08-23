@@ -42,6 +42,19 @@ create or replace table fitness_raw.myfitnesspal.nutrition
   notes VARCHAR(500)
 );
 
+create or replace table fitness_raw.training.btwb
+(
+  date DATE,
+  workout VARCHAR(500),
+  result FLOAT,
+  prescribed BOOLEAN,
+  work_performed VARCHAR(50),
+  work_time_ms INT,
+  result_formatted VARCHAR(500)--,
+--   notes VARCHAR(500),
+--   description VARCHAR(1000)
+);
+
 copy into fitness_raw.myfitnesspal.measurements
 from @fitness_s3_stage/Measurement-Summary-2014-07-04-to-2023-08-18.csv
 file_format = (
@@ -58,6 +71,16 @@ file_format = (
   skip_header = 1
 );
 
+-- format the source file in s3 to replace "," with ";" and remove description and notes columns (contain newline characters)
+copy into fitness_raw.training.btwb
+from @fitness_s3_stage/btwb_2023-08-16_format_nodesc-notes.csv
+file_format = (
+  type = 'CSV'
+  field_delimiter = ','
+  skip_header = 1
+);
+
 -- Step 4: Verify that the data was loaded correctly
 select * from fitness_raw.myfitnesspal.measurements
 select * from fitness_raw.myfitnesspal.nutrition
+select * from fitness_raw.training.btwb
