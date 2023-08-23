@@ -17,23 +17,27 @@ create table fitness_raw.myfitnesspal.measurements
   weight FLOAT
 );
 
-create table fitness_raw.myfitnesspal.nutrition
+create or replace table fitness_raw.myfitnesspal.nutrition
 (
   date DATE,
   meal VARCHAR(50),
   time DATETIME,
   calories FLOAT,
   fat_g FLOAT,
-  protein_g FLOAT,
+  fat_saturated_g FLOAT,
+  fat_polyunsaturated_g FLOAT,
+  fat_monounsaturated_g FLOAT,
+  fat_trans_g FLOAT,
+  cholesterol_mg FLOAT,
+  sodium_mg FLOAT,
+  potassium_mg FLOAT,
   carbs_g FLOAT,
   fiber_g FLOAT,
-  sugar_g FLOAT
-);
-
-copy into fitness_raw.myfitnesspal.measurements (date, weight)
-from @fitness_s3_stage/Measurement-Summary-2014-07-04-to-2023-08-18.csv
-file_format = (
-  type = 'CSV'
-  field_delimiter = ','
-  skip_header = 1
+  sugar_g FLOAT,
+  protein_g FLOAT,
+  vitamin_A_ug FLOAT,
+  vitamin_C_mg FLOAT,
+  calcium_mg FLOAT,
+  iron_mg FLOAT,
+  notes VARCHAR(500)
 );
