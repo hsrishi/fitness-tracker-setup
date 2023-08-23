@@ -57,3 +57,7 @@ file_format = (
   field_delimiter = ','
   skip_header = 1
 );
+
+-- Step 4: Verify that the data was loaded correctly
+select * from fitness_raw.myfitnesspal.measurements
+select * from fitness_raw.myfitnesspal.nutrition
